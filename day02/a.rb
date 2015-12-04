@@ -1,3 +1,4 @@
+include 'present'
 include 'input'
 
 # calculate area of all sides
@@ -6,5 +7,4 @@ include 'input'
 # => top, bottom = width x depth
 # => front, back = width x height
 # => right, left = depth x height
-
 
