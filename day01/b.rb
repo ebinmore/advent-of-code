@@ -15,4 +15,4 @@ while current_travels.count("(") >= current_travels.count(")") do
   last_position = next_position + 1
 end
 
-puts "first trip to basemenet occurs at position #{next_position}" 
+puts "first trip to basemenet occurs at position #{next_position + 1}" 
