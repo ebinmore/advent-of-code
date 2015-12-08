@@ -31,8 +31,6 @@ class Santa
 
   def deliveries
     @locations_delivered_to
-
-    puts "Total deliveries #{@total_deliveries} \tNew Locations #{@new_locations} \tExisting Locations #{@existing_locations} "
   end
 
 end
