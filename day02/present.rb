@@ -21,7 +21,7 @@ class Present
   end
 
   def ribbon_required
-    @permieter_of_sides.min + @volume
+    @perimeter_of_sides.min + @volume
   end
 
 end
