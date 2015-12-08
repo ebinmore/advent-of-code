@@ -8,3 +8,4 @@ include 'input'
 # => front, back = width x height
 # => right, left = depth x height
 
+puts "Total wrapping paper required is #{presents.map(&:wrapping_paper_required).reduce(0, &:+)} m2."
