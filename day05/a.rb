@@ -31,7 +31,7 @@ tests.each do |name|
   puts
 end
 
-intern_elf = InternElf.new( naughty_and_nice: naughty_and_nice,
+intern_elf = InternElf.new( naughty_and_nice: tests, #naughty_and_nice,
                             nice_conditions: [three_vowels, double_letter],
                             naughty_conditions: [combos] )
 intern_elf.go_through_list
