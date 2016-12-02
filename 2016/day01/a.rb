@@ -4,12 +4,13 @@ easter_bunny_recruiting_document = IO.read("a.input")
 
 
 taxi = Taxi.new
-easter_bunny_recruiting_document.split(",").each do |instruction|
-  turn = instruction[0]
+easter_bunny_recruiting_document.split(",").map(&:strip).each do |instruction|
+  turn = instruction
+  puts "instruction = #{instruction}"
   taxi.turn_left if turn == "L"
   taxi.turn_right if turn == "R"
 
-  distance = instruction[1..-1].strip
+  distance = instruction[1..-1]
   taxi.travel(distance.to_i)
 end
 
