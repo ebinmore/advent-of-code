@@ -27,7 +27,6 @@ class Map
       @intersections << [@pen[0], y] if @canvas[point] > 1
     end
 
-    # this isn't actually solving the problem... I want the first intersection, but that's easy enough... intersections[0] :-)
     @pen = destination
   end
 

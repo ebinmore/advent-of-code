@@ -1,7 +1,7 @@
 require_relative "taxi"
 require_relative "map"
 
-easter_bunny_recruiting_document = IO.read("test.input")
+easter_bunny_recruiting_document = IO.read("a.input")
 
 taxi = Taxi.new
 map = Map.new({ start: taxi.current_position })
