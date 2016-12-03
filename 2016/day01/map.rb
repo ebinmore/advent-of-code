@@ -9,36 +9,24 @@ class Map
   end
 
   def trace_route(destination)
-    # this only handles travel in one direction at a time / travel is orthogonal
-    # @pen.index.each do |R|
-    #   if @pen[R] != destination[R]
-    #     # loop from @pen[R] to destination[R] and add each point on the line
-    #     @pen[R]..destination[R].each do |plotter|
-    #       # so how do i get each dimension? I'm making this more complicated by trying to be generalize the number of dimensions
-    #     end
-    #   end
-    # end
     puts "tracing a route from #{@pen} to #{destination}"
-    if @pen[0] != destination[0]
-      (@pen[0]..destination[0]).each do |x|
-        point = [x, @pen[1]].to_s
-        @canvas[point] = 0 unless @canvas.include?(point)
-        @canvas[point] += 1
-        puts "adding point #{point}:#{@canvas[point]}"
-        @intersections << [x, @pen[1]] if @canvas[point] > 1
-      end
+    # we drop(1) because (0..0).each iterates once, but our @pen is already there...
+    (@pen[0]..destination[0]).drop(1).each do |x|
+      point = [x, @pen[1]].to_s
+      @canvas[point] = 0 unless @canvas.include?(point)
+      @canvas[point] += 1
+      puts "adding point #{point}:#{@canvas[point]}"
+      @intersections << [x, @pen[1]] if @canvas[point] > 1
     end
 
-    # now duplicate for y
-    if @pen[1] != destination[1]
-      (@pen[1]..destination[1]).each do |y|
-        point = [@pen[0], y].to_s
-        @canvas[point] = 0 unless @canvas.include?(point)
-        @canvas[point] += 1
-        puts "adding point #{point}:#{@canvas[point]}"
-        @intersections << [@pen[0], y] if @canvas[point] > 1
-      end
+    (@pen[1]..destination[1]).drop(1).each do |y|
+      point = [@pen[0], y].to_s
+      @canvas[point] = 0 unless @canvas.include?(point)
+      @canvas[point] += 1
+      puts "adding point #{point}:#{@canvas[point]}"
+      @intersections << [@pen[0], y] if @canvas[point] > 1
     end
+
     # this isn't actually solving the problem... I want the first intersection, but that's easy enough... intersections[0] :-)
     @pen = destination
   end
