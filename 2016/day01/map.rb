@@ -1,8 +1,8 @@
 
 class Map
 
-  def initialize(params = {})
-    @pen = [0,0]
+  def initialize(params = { start: [0,0] })
+    @pen = params[:start]
     @canvas = { @pen : 1 }
     @intersections = [] # ordered
   end
