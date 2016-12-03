@@ -18,21 +18,26 @@ class Map
     #     end
     #   end
     # end
-    (@pen[0]..destination[0]).each do |x|
-      point = [x, @pen[1]].to_s
-      @canvas[point] = 0 unless @canvas.include?(point)
-      @canvas[point] += 1
-
-      @intersections << [x, @pen[1]] if @canvas[point] > 1
+    puts "tracing a route from #{@pen} to #{destination}"
+    if @pen[0] != destination[0]
+      (@pen[0]..destination[0]).each do |x|
+        point = [x, @pen[1]].to_s
+        @canvas[point] = 0 unless @canvas.include?(point)
+        @canvas[point] += 1
+        puts "adding point #{point}:#{@canvas[point]}"
+        @intersections << [x, @pen[1]] if @canvas[point] > 1
+      end
     end
 
     # now duplicate for y
-    (@pen[1]..destination[1]).each do |y|
-      point = [@pen[0], y].to_s
-      @canvas[point] = 0 unless @canvas.include?(point)
-      @canvas[point] += 1
-
-      @intersections << [@pen[0], y] if @canvas[point] > 1
+    if @pen[1] != destination[1]
+      (@pen[1]..destination[1]).each do |y|
+        point = [@pen[0], y].to_s
+        @canvas[point] = 0 unless @canvas.include?(point)
+        @canvas[point] += 1
+        puts "adding point #{point}:#{@canvas[point]}"
+        @intersections << [@pen[0], y] if @canvas[point] > 1
+      end
     end
     # this isn't actually solving the problem... I want the first intersection, but that's easy enough... intersections[0] :-)
     @pen = destination
