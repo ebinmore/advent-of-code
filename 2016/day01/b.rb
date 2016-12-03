@@ -5,6 +5,7 @@ easter_bunny_recruiting_document = IO.read("a.input")
 
 taxi = Taxi.new
 map = Map.new({ start: taxi.current_position })
+stops = []
 stops << taxi.current_position
 
 easter_bunny_recruiting_document.split(",").map(&:strip).each do |instruction|
