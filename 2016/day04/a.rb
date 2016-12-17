@@ -1,7 +1,7 @@
 require_relative 'room'
 
 sum_of_sector_ids_for_real_rooms = 0
-File.open("test.input").each_line do |line|
+File.open("a.input").each_line do |line|
   room = Room.new(line.strip)
   if room.valid?
     sum_of_sector_ids_for_real_rooms += room.sector_id
