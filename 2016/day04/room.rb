@@ -35,14 +35,16 @@ class Room
   def decrypt
     commonality = @letters.group_by { |i| i } # produces { "a": [a,a,a,a], "b": [b,b,b], ... "z": [z]}
     commonality.update(commonality) { |key, value| value.count } # { "a": 4, "b": 3, ..., "z": 1 }
-    puts "commonality = #{commonality}"
+    puts "letter frequency = #{commonality}"
     # takes { a: 5, b: 2, c: 3, d: 3, e: 3} => {5: [a], 2: [b], 3: [c, d, e]}
     commonality = commonality.reduce({}) do |hash, (key, value)|
       hash[value] = [] unless hash.keys.include? value
       hash[value] << key
       hash
     end
-    commonality.sort.reverse # sorts by key highest to lowest
+    puts "frequency of letters = #{commonality}"
+    commonality = commonality.sort.reverse.to_h # sorts by key highest to lowest
+    puts "ordered highest to lowest frequency = #{commonality}"
     commonality.update(commonality) { |key, value| value.sort } # sorts each value array
     commonality.values.flatten[0..(@checksum.length - 1)].join
   end
