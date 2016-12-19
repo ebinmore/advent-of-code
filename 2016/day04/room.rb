@@ -31,7 +31,7 @@ class Room
   end
 
   def compute_checksum
-    letters = encrypted_name.split("-").map(&:chars).flatten
+    letters = @encrypted_name.split("-").map(&:chars).flatten
     puts "letters = #{letters}"
 
     commonality = letters.group_by { |i| i } # produces { "a": [a,a,a,a], "b": [b,b,b], ... "z": [z]}
@@ -49,7 +49,5 @@ class Room
     commonality.update(commonality) { |key, value| value.sort } # sorts each value array
     commonality.values.flatten[0..(@checksum.length - 1)].join
   end
-
-  def
 
 end
