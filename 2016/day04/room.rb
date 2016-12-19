@@ -25,14 +25,16 @@ class Room
   end
 
   def valid?
-    decrypted = decrypt
+    # @checksum is the provided
+    # checksum is the calculated
+    checksum = compute_checksum
 
-    puts "#{@encrypted_name} decrypted to #{decrypted} which #{decrypted == @checksum ? 'matches' : 'does not match'} the checksum #{@checksum}."
+    puts "#{@encrypted_name} decrypted to #{checksum} which #{checksum == @checksum ? 'matches' : 'does not match'} the checksum #{@checksum}."
 
-    decrypted == @checksum
+    checksum == @checksum
   end
 
-  def decrypt
+  def compute_checksum
     commonality = @letters.group_by { |i| i } # produces { "a": [a,a,a,a], "b": [b,b,b], ... "z": [z]}
     commonality.update(commonality) { |key, value| value.count } # { "a": 4, "b": 3, ..., "z": 1 }
     puts "letter frequency = #{commonality}"
