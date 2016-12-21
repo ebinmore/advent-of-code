@@ -1,7 +1,7 @@
 require_relative 'room'
 
 possible_rooms = {}
-File.open("test.input").each_line do |line|
+File.open("a.input").each_line do |line|
   room = Room.new(line.strip)
   if room.valid?
     decrypted_room_name  = room.decrypt
