@@ -50,4 +50,24 @@ class Room
     commonality.values.flatten[0..(@checksum.length - 1)].join
   end
 
+  def decrypt
+    $stdout.sync
+    words = @encrypted_name.split("-")
+    words.pop # get rid of the sector_id & checksum
+
+    decrypted = []
+    alphabet = "abcdefghijklmnopqrstuvwxyz".chars
+    words.each do |word|
+      print "translating #{word} to "
+      decrypted_word = []
+      word.downcase.each_char do |char|
+        decrypted_word << alphabet[(alphabet.index_of(char) + 1) % alphabet.count]
+        print decrypted_word
+      end
+      print "\n"
+      decrypted << decrypted_word
+    end
+
+    decrypted.map{ |word| word.join }.join(" ")
+  end
 end
