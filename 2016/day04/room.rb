@@ -61,7 +61,7 @@ class Room
       print "translating #{word} to "
       decrypted_word = []
       word.downcase.each_char do |char|
-        decrypted_word << alphabet[(alphabet.index_of(char) + 1) % alphabet.count]
+        decrypted_word << alphabet[(alphabet.index(char) + 1) % alphabet.count]
         print decrypted_word
       end
       print "\n"
