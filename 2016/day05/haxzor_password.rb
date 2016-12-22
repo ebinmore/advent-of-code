@@ -5,7 +5,7 @@ class HaxzorPassword
 
   def initialize(params = {})
     @door_id = params[:door_id]
-    @password_length = 2
+    @password_length = 8
     @hash_criteria = '00000'
     @hash_length = @hash_criteria.length
 
@@ -15,7 +15,7 @@ class HaxzorPassword
   private def generate_hacking_movie_password
     md5 = Digest::MD5.new
 
-    index = 3231900
+    index = 1
     password = []
     while (password.length < @password_length)
       to_be_hashed = "#{@door_id}#{index}"
