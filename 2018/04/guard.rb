@@ -36,7 +36,8 @@ class Guard
 
 
   def to_s
-    str =  "Date\t\tMinute\n"
+    str =  "Gaurd ##{id}"
+    str += "Date\t\tMinute\n"
     str += "    \t\t000000000011111111112222222222333333333344444444445555555555\n"
     str += "    \t\t012345678901234567890123456789012345678901234567890123456789\n"
     @sleep_schedule.each do |date, schedule|
