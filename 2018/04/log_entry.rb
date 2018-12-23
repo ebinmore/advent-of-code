@@ -1,5 +1,5 @@
 class LogEntry
-  attr_reader :raw, :day, :hour, :minute, :status, :time
+  attr_reader :raw, :year, :month, :day, :hour, :minute, :status, :time
   attr_accessor :guard
 
   def initialize(data)
