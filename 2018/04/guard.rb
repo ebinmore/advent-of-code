@@ -1,3 +1,5 @@
+require 'byebug'
+
 class Guard
   attr_reader :id, :sleep_schedule
 
@@ -31,12 +33,17 @@ class Guard
   def most_frequently_slept_minute
     minutes = @sleep_schedule.values.transpose
     minutes.map!(&:sum)
-    minutes.each.with_index { |total_slept, minute| return minute if total_slept == minutes.max }
+    minutes.each_with_index { |slept, minute| return minute if slept == minutes.max }
   end
 
+  def occurrence_of_most_frequently_slept_minute
+    minutes = @sleep_schedule.values.transpose
+    minutes.map!(&:sum)
+    minutes.max
+  end
 
   def to_s
-    str =  "Gaurd ##{id}"
+    str =  "Gaurd ##{id}\n"
     str += "Date\t\tMinute\n"
     str += "    \t\t000000000011111111112222222222333333333344444444445555555555\n"
     str += "    \t\t012345678901234567890123456789012345678901234567890123456789\n"
