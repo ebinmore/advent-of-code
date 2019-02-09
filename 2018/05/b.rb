@@ -1,15 +1,16 @@
 require_relative 'setup'
 require_relative 'reactor'
 
-puts "Using the test data -- #{Setup.test_data}"
-polymer = Setup.test_data
+# puts "Using the test data -- #{Setup.test_data}"
+# polymer = Setup.test_data
 
+polymer = Setup.data
 
 puts "Removing reagent and reacting"
 reagents = Reactor.breakdown(polymer)
 reacted_polymers = reagents.map do |reagent|
   stripped = Reactor.scrub(polymer, reagent)
-  puts "stripped #{stripped}"
+  # puts "stripped #{stripped}"
   {reagent: reagent, polymer: Reactor.ignite(stripped)}
 end
 
@@ -21,7 +22,7 @@ shortest_polymer = reacted_polymers.min_by do |reacted|
   puts "#{reacted[:polymer].length} : #{reacted}"
   reacted[:polymer].length
 end
-puts "The shortest polymer is #{shortest_polymer} and has a length of #{shortest_polymer[:polymer].length}"
+puts "The shortest polymer is #{shortest_polymer[:reagent]} and has a length of #{shortest_polymer[:polymer].length}"
 
 
 # puts "Putting the polymer in the reactor..."
