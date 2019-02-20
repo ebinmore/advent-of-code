@@ -7,10 +7,10 @@ class DrManhattan
     max_x, max_y = grid_size
     (0..max_x).each do |x|
       (0..max_y).each do |y|
-        if @data.include?([y, x]) #why? because the example in the question is fucked
-          print 'x'
+        if index = @data.index([y, x]) #why? because the example in the question is fucked
+          print "#{index.to_s.rjust(2, "0")}|" #need to print the index of the matching @data, masked with '00'; max handled is 99 elements
         else
-          print '.'
+          print '..|' #two place holders
         end
       end
       puts ''
