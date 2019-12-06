@@ -1,7 +1,14 @@
 class IntComputer
 
-  def initialize(program)
+  def initialize(program, alarm_code: nil)
     @initial_state = program.to_s.split(',').map(&:to_i)
+    byebug
+    if alarm_code
+      modifiers = [alarm_code[0..1].to_i, alarm_code[2..3].to_i]
+      @initial_state[1] = modifiers[0]
+      @initial_state[2] = modifiers[1]
+    end
+    byebug
   end
 
   def perform_operation
