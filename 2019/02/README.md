@@ -53,6 +53,7 @@ Once you have a working computer, the first step is to restore the gravity assis
 Your puzzle answer was 4138658.
 
 The first half of this puzzle is complete! It provides one gold star: *
+
 --- Part Two ---
 
 "Good, the new computer seems to be working correctly! Keep it nearby during this mission - you'll probably use it again. Real Intcode computers support many more features than your new one, but we'll let you know what they are as you need them."
@@ -72,3 +73,5 @@ The inputs should still be provided to the program by replacing the values at ad
 Once the program has halted, its output is available at address 0, also just like before. Each time you try a pair of inputs, make sure you first reset the computer's memory to the values in the program (your puzzle input) - in other words, don't reuse memory from a previous attempt.
 
 Find the input noun and verb that cause the program to produce the output 19690720. What is 100 * noun + verb? (For example, if noun=12 and verb=2, the answer would be 1202.)
+
+7264
