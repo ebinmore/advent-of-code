@@ -2,21 +2,24 @@ module Setup
   @test_program_data = {
     simple: {
       data: [%w[R8 U5 L5 D3], %w[U7 R6 D4 L4]],
-      answer: 6
+      manhattan_distance: 6,
+      steps: 30
     },
     one: {
       data: [
         %w[R75 D30 R83 U83 L12 D49 R71 U7 L72],
         %w[U62 R66 U55 R34 D71 R55 D58 R83]
       ],
-      answer: 159
+      manhattan_distance: 159,
+      steps: 610
     },
     two: {
       data: [
         %w[R98 U47 R26 D63 R33 U87 L62 D20 R33 U53 R51],
         %w[U98 R91 D20 R16 D67 R40 U7 R15 U6 R7]
       ],
-      answer: 135
+      manhattan_distance: 135,
+      steps: 410
     }
   }
 

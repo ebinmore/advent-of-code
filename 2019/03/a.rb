@@ -10,7 +10,7 @@ Setup.test_data.each do |name, test|
   puts '--------------------------------------'
   trace_one = test[:data][0]
   trace_two = test[:data][1]
-  answer = test[:answer]
+  manhattan_distance = test[:manhattan_distance]
 
   puts "trace_one: #{trace_one}"
   puts "trace_two: #{trace_two}"
@@ -25,7 +25,7 @@ Setup.test_data.each do |name, test|
 
   puts "the shortest manhattan distance is: #{manhattan_distances.min}"
 
-  puts "confirmation: #{answer}"
+  puts "confirmation: #{manhattan_distance}"
   puts '--------------------------------------'
 end
 
