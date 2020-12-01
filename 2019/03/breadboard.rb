@@ -25,28 +25,21 @@ class Breadboard
     wire_one.line_segments.each do |source|
       # find the dimension the line is travelling in
       # ie. the other dimesion will be static (difference is 0)
-
       dx = (source[:a][0] - source[:b][0]).abs
       dy = (source[:a][1] - source[:b][1]).abs
-      puts "dx: #{dx}\tdy: #{dy}"
 
       range_x = get_range(source[:a][0], source[:b][0])
       range_y = get_range(source[:a][1], source[:b][1])
 
       # the stationary dimension is the range with only one element
       if dx == 0
-        puts "dx == 0"
         # select all the line where y is static
         may_intersect = wire_two.line_segments.select do |seg|
           seg[:a][1] == seg[:b][1]
         end
 
         # now the line segments that may intersect, check if the does
-        intersecting_segments = wire_two.line_segments.select do |seg|
-          puts "wire_one.line_segment: #{source}"
-          puts "wire_two line segment: #{seg}"
-          puts "cover? #{(seg[:a][0]..seg[:b][0]).cover?(range_x.first) && range_y.cover?(seg[:a][1])}"
-          puts ""
+        intersecting_segments = may_intersect.select do |seg|
           get_range(seg[:a][0], seg[:b][0]).cover?(range_x.first) && range_y.cover?(seg[:a][1])
         end
 
@@ -61,7 +54,6 @@ class Breadboard
 
       # repeat for a static y dimension
       if dy == 0
-        puts "dy == 0"
         # select all the line where x is static
         may_intersect = wire_two.line_segments.select do |seg|
           seg[:a][0] == seg[:b][0]
@@ -69,11 +61,6 @@ class Breadboard
 
         # now the line segments that may intersect, check if the does
         intersecting_segments = may_intersect.select do |seg|
-          puts "wire_one.line_segment: #{source}"
-          puts "wire_two line segment: #{seg}"
-          puts "cover? #{range_x.cover?(seg[:a][0]) && (seg[:a][1]..seg[:b][1]).cover?(range_y.first)}"
-          puts
-          # byebug
           range_x.cover?(seg[:a][0]) && get_range(seg[:a][1], seg[:b][1]).cover?(range_y.first)
         end
 

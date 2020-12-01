@@ -5,10 +5,9 @@ require_relative 'wire.rb'
 
 puts '--- TEST RUN ---'
 Setup.test_data.each do |name, test|
-  next unless name == :simple
-  puts "--------------------------------------"
+  puts '--------------------------------------'
   puts "Performing test: #{name}"
-  puts "--------------------------------------"
+  puts '--------------------------------------'
   trace_one = test[:data][0]
   trace_two = test[:data][1]
   answer = test[:answer]
@@ -19,6 +18,28 @@ Setup.test_data.each do |name, test|
   breadboard = Breadboard.new(trace_one, trace_two)
   breadboard.find_intersections
 
-  puts "answer: #{answer}"
-  puts "--------------------------------------"
+  intersections = breadboard.intersections
+  manhattan_distances = intersections.map do |intersection|
+    intersection[:point][0].abs + intersection[:point][1].abs
+  end
+
+  puts "the shortest manhattan distance is: #{manhattan_distances.min}"
+
+  puts "confirmation: #{answer}"
+  puts '--------------------------------------'
 end
+
+
+puts '--------------------------------------'
+puts '--- ACTUAL RUN                     ---'
+puts '--------------------------------------'
+breadboard = Breadboard.new(Setup.wire_one, Setup.wire_two)
+breadboard.find_intersections
+
+intersections = breadboard.intersections
+manhattan_distances = intersections.map do |intersection|
+  intersection[:point][0].abs + intersection[:point][1].abs
+end
+
+puts "the shortest manhattan distance is: #{manhattan_distances.min}"
+puts '--------------------------------------'
