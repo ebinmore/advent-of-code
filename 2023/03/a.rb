@@ -35,7 +35,7 @@ else
 end
 
 # find special characters
-SPECIAL_CHARACTERS = /[\*\@\=\%\+\$\&\/\-\#]/
+SPECIAL_CHARACTERS = /[\*@=%\+\$&\/\-#]/
 def find_special_characters(data, opts: {})
     coordinates = [] # contains [x, y]
 
@@ -58,7 +58,6 @@ NUMBERS = /\d+/
 def find_all_potential_parts(data, opts: {})
     potential_parts = []
 
-    puts "parsing NUMBERS:" if opts.debug
     data.each_with_index do |line, y|
         line.scan(NUMBERS) do |match|
             potential_part = { number: match, coordinates: [] } 
@@ -77,12 +76,17 @@ end
 
 # compare position of the special with the potential part numbers
 # to determine the actual part numbers
-def find_engine_parts(special_characters, potential_parts, opts: {})
+def find_engine_parts(special_characters, potential_parts, map_size, opts: {})
     parts = []
     special_characters.each do |x, y|
         # look for numbers with coordinate that are x+/-1 and/or y+/-1
-        x_range = (x-1)..(x+1)
-        y_range = (y-1)..(y+1)
+        min_x = x == 0 ? x : x - 1
+        max_x = x == map_size[:x] ? x : x + 1
+        x_range = (min_x)..(max_x)
+
+        min_y = y == 0 ? y : y - 1
+        max_y = y == map_size[:y] ? y : y + 1
+        y_range = (min_y)..(max_y)
 
         puts "finding engine parts: for #{x}, #{y}" if opts.debug
         potential_parts.select do |potential_part|
@@ -101,23 +105,23 @@ def find_engine_parts(special_characters, potential_parts, opts: {})
 end
 
 def map_engine(engine, opts: {})
+    map_size = { x: engine[:map].first.length - 1, y: engine[:map].count - 1 }
     engine[:special_characters] = find_special_characters(engine[:map], opts: opts)
     engine[:potential_parts] = find_all_potential_parts(engine[:map], opts: opts)
-    engine[:parts] = find_engine_parts(engine[:special_characters], engine[:potential_parts], opts: opts)
+    engine[:parts] = find_engine_parts(engine[:special_characters], engine[:potential_parts], map_size, opts: opts)
 end
 
 engine = { map: input }
 map_engine(engine, opts: args)
 
 # calculate puzzle total
-total = 0
-engine[:parts].each do |part|
-    puts "running_total: #{total} + #{part[:number]}"
-    total += part[:number].to_i 
+part_numbers = engine[:parts].map do |part|
+    part[:number].to_i
 end
 
-byebug
+total = part_numbers.reduce(0) { |sum, n| sum += n }
 
+byebug
 
 puts "total: #{total}"
 puts "Fin"
