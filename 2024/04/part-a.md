@@ -43,3 +43,7 @@ Take a look at the little Elf's word search. How many times does XMAS appear?
 To begin, get your puzzle input.
 
 Answer:
+
+2618
+
+That's the right answer! You are one gold star closer to finding the Chief Historian. [Continue to Part Two]

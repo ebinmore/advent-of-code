@@ -28,12 +28,6 @@ else
   File.readlines(filename, chomp: true).map(&:chars)
 end
 
-# def print_cartesian(array)
-#   # reverse the order of the rows to print the highest y row first
-#   array.reverse.each { |row| pp row }
-# end
-
-byebug
 pp data
 # [0][0] is the origin
 # The rows print down (higher index, lower down)
@@ -53,7 +47,7 @@ def transform(data)
   # travel DOWN (higher Y) 
   # start at the first column and traverse the rows
   down = data.first.map.with_index do |char, column|
-    ([char] + data.map { |row| row[column] }).join
+     (data.map { |row| row[column] }).join
   end
   puts "DOWN:"
   pp down
@@ -68,9 +62,12 @@ def transform(data)
   # width = data.first.length
   # height = data.length
   # build diagonal strings along the x-axis
-  down_and_right << data.first.map.with_index do |char, index|
-    diagonal = [char] + (0..data.first.length).map do |increment|
-      data[index + increment][index + increment] if data[index + increment]
+  row = data.first
+  down_and_right << row.map.with_index do |char, index|
+    puts "char: #{char} index: #{index} - row: #{row.join}"
+    diagonal = (0..row.length).map do |increment|
+      puts "increment: #{increment} - data[#{increment}][#{index + increment}]: #{data[increment][index + increment]}" if data[increment]
+      data[increment][index + increment] if data[increment]
     end
     diagonal.join
   end
@@ -80,20 +77,69 @@ def transform(data)
   # build diagonal strings along the y-axis
   down_and_right << data.map.with_index do |row, index|
     next if index == 0
-    diagonal = [row[0]] + (0..data.length).map do |increment|
-      data[index + increment][index + increment] if data[index + increment]
+    diagonal = (0..data.length).map do |increment|
+      data[index + increment][increment] if data[index + increment]
     end
-    # byebug
     diagonal.join
   end
   puts "DOWN_AND_RIGHT (Step 2):"
   pp down_and_right.flatten!.compact!
   puts
-  byebug
 
-  # return [right, up, down_right, down_left]
+  # travel UP and RIGHT (decreasing y, increasing x)
+  # start at the last row and travel up & right
+  up_and_right = []
+  up_and_right << data.reverse.first.map.with_index do |char, index|
+    puts "char: #{char} index: #{index} - row: #{row.join}"
+    diagonal = (0..data.first.length).map do |increment|
+      puts "increment: #{increment} - data[#{increment}][#{index + increment}]: #{data[increment][index + increment]}" if data.reverse[increment]
+      data.reverse[increment][index + increment] if data.reverse[increment]
+    end
+    diagonal.join
+  end
+  puts "UP_AND_RIGHT (Step 1):"
+  pp up_and_right
+  puts
+  # build diagonal strings along the y-axis
+  up_and_right << data.reverse.map.with_index do |row, index|
+    next if index == 0
+    diagonal = (0..data.length).map do |increment|
+      data.reverse[index + increment][increment] if data.reverse[index + increment]
+    end
+    diagonal.join
+  end
+  puts "UP_AND_RIGHT (Step 2):"
+  pp up_and_right.flatten!.compact!
+  puts
+  
+  return [right, down, down_and_right, up_and_right]
 end
 
-right, up, up_and_right, down_right = transform(data)
+right, down, down_and_right, up_and_right = transform(data)
 
+# now that the data has been transformed, search for XMAS in the directions
+XMAS = /XMAS/
+
+searching = {}
+searching[:right] = right.map { |row| row.scan(XMAS).count }.sum
+searching[:left] = right.map { |row| row.reverse.scan(XMAS).count }.sum
+searching[:down] = down.map { |row| row.scan(XMAS).count }.sum
+searching[:up] = down.map { |row| row.reverse.scan(XMAS).count }.sum
+searching[:down_right] = down_and_right.map { |row| row.scan(XMAS).count }.sum
+searching[:up_left] = down_and_right.map { |row| row.reverse.scan(XMAS).count }.sum
+searching[:up_right] = up_and_right.map { |row| row.scan(XMAS).count }.sum
+searching[:down_left] = up_and_right.map { |row| row.reverse.scan(XMAS).count }.sum
+searching[:total] = 
+  searching[:right] + 
+  searching[:left] +
+  searching[:down] +
+  searching[:up] +
+  searching[:down_right] +
+  searching[:up_left] +
+  searching[:up_right] +
+  searching[:down_left]
+
+pp searching
+
+puts "Total found: #{searching[:total]}"
 

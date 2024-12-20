@@ -1,0 +1,74 @@
+DATA:
+M M M S X X M A S M
+M S A M X M S M S A
+A M X S X M A A M M
+M S A M A S M S M X
+X M A S A M X A M M
+X X A M M X X A M A
+S M S M S A S X S S
+S A X A M A S A A A 
+M A M M M X M M M M
+M X M X A X M A S X
+
+DOWN & RIGHT ACTUAL
+m s x m a x s a m x
+m a s a m x x a m
+m m x s x a s a 
+...
+m m a s m a s m s
+a s a m s a m a
+m m a m m x m 
+...
+
+DOWN_AND_RIGHT (Step 2):
+["MSXMAXSAMX",
+ "MASAMXXAM",
+ "MMXSXASA",
+ "SXMMAMS",
+ "XMASMA",
+ "XSAMM",
+ "MMMX",
+ "ASM",
+ "SA",
+ "M",
+ "MMASMASMS",
+ "ASAMSAMA",
+ "MMAMMXM",
+ "XXSAMX",
+ "XMXMA",
+ "SAMX",
+ "SAM",
+ "MX",
+ "M"]
+
+
+UP & RIGHT ACTUAL
+m a x m m m m a s m
+x m a s x x s m a
+m m m a x a m m
+...
+m a s m a s a m s
+s m a s a m s a
+s x a m x m m 
+...
+
+UP_AND_RIGHT (Step 2):
+["MAXMMMMASM",
+ "XMASXXSMA",
+ "MMMAXAMM",
+ "XMASAMX",
+ "AXSXMM",
+ "XMASA",
+ "MMAS",
+ "AMA",
+ "SM",
+ "X",
+ "MASMASAMS",
+ "SMASAMSA",
+ "SXAMXMM",
+ "XMASXX",
+ "XSXMX",
+ "MMAS",
+ "ASM",
+ "MM",
+ "M"]
